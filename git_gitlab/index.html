@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .gl-logo img { height: 100pt }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Git and Gitlab
+
+Hubert Jarosz, 2016
+
+---
+
+# Installation
+
+#### Linux
+
+Should be already installed. If not - install **`git`** package using your
+package manager.
+
+#### macOS
+
+It will be installed along with other Command Line Tools via:  
+```
+xcode-select --install
+```  
+If you want newer version - get it via
+[Homebrew](http://brew.sh/):
+```
+brew install git
+```
+
+#### Windows
+
+Download from https://git-scm.com/download/  
+
+All examples will use git shell, not GUI nor third-party software.
+
+---
+
+# Git
+
+* snapshots of filesystem, not diffs
+
+* most things are local
+
+* integrity - SHA-1 checksums
+
+### Glossary
+
+**Commit** object - pointer to a snapshot, identified by SHA-1 hash
+
+**Tag** - named pointer to commit object (eg. `v0.1`)
+
+**Branch** - movable named pointer to commit object
+
+Branch moves forward automatically with each time you commit on it.
+Default branch in Git is named `master`.
+
+---
+
+# Introduction
+
+## Create new repository
+
+```
+mkdir repo_name
+cd repo_name
+git init
+```
+
+## Clone existing repository
+
+```
+git clone https://gitlab.com/gitlab-org/gitlab-ce
+cd gitlab-ce
+```
+or
+```
+git clone https://gitlab.com/gitlab-org/gitlab-ce my_gitlab-ce
+cd my_gitlab-ce
+```
+
+---
+
+# Staging code
+
+If we want to add new files or our changes to commit we have to **stage**
+those files.
+
+For one file:
+```
+git add path/to/file
+```
+
+Mass-stage all files in repo:
+```
+git add .
+```
+
+### protip
+
+```
+git status
+```
+
+---
+
+# Commiting your code
+
+Simple way:
+```
+git commit -m "Some commit message."
+```
+
+If you want multi-line commit message:
+```
+git commit
+```
+
+**BEWARE** - latter command may run **vi** as your default editor. To forcefully quit vi
+press `Esc`, write `:q!`, and press `ENTER`.
+
+### protip
+
+```
+git commit -a -m "Some commit message."
+```
+`-a` flag stages all changed files (but doesn't add new ones to repo!)
+
+---
+
+# Pulling and pushing
+
+#### Pull new commits from remote repository
+```
+git pull
+```
+
+**BEWARE** - if you have made new commit in local repo and there are new commits
+in remote, you may need to merge. If Git does auto-merge and prompts **vi**, you
+have to press **Esc**, write **:wq** and press **ENTER** to confirm.
+
+In some cases you may have merge conflicts. In such case read about resolving
+them in Git documentation.
+
+#### Push commits to remote repository
+```
+git push
+```
+
+#### View log of commits on current branch
+```
+git log
+```
+
+---
+
+# Branches
+
+Create new branch named *`fix_asset_42`*:
+```
+git checkout -b fix_asset_42
+```
+
+Get back to master:
+```
+git checkout master
+```
+
+See on which branch you are:
+```
+git branch
+```
+
+Print all local branches:
+```
+git branch --list
+```
+
+Print all local and remote branches:
+```
+git branch --all
+```
+
+---
+
+# GitLab
+
+* Git repository manager
+
+* issue tracking, code reviews and wikis
+
+* free private repositories
+
+* can be self-hosted (it's open source!)
+
+<br>
+
+.center[.gl-logo[![GitLab Logo](https://gitlab.com/gitlab-com/gitlab-artwork/raw/master/wordmark/wm_no_bg.png)]]
+
+.center[https://about.gitlab.com/]
+
+---
+
+# Workflow
+
+1. Fork the project to your own repository.
+
+2. Work different features on different branches.
+
+3. Make *Merge Request* of your branches to main project.
+
+<br><br><br>
+
+.center[*I'll now show you GitLab in my browser.*]
+
+---
+
+# Advanced topics
+
+Things you can explore about Git:
+
+* tags
+
+* merges and rebases
+
+* signing commits with GPG
+
+* `git-filter-branch`
+
+* git hooks
+
+### Where?
+
+* *"Pro Git"* book (see next slide)
+* StackOverflow
+
+---
+
+# Pro Git Book
+
+If you want to learn more about Git I suggest you to read **Pro Git** by
+Scott Chacon and Ben Straub.
+
+Where to get:
+* https://git-scm.com/book/
+* Amazon
+
+**Free**, with community-contributed translations:
+
+>This book is translated into Deutsch, 简体中文, 正體中文, Français, 日本語, Nederlands, Русский, 한국어, Português (Brasil) and Čeština.
+
+>Partial translations available in Arabic, Español, Indonesian, Italiano, Suomi, Македонски, **Polski** and Türkçe.
+
+
+
+    </textarea>
+    <script src="../.js/remark-0_14_0.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+        highlightStyle: "monokai",
+        highlightLanguage: "bash",
+        highlightSpans: true
+      });
+    </script>
+  </body>
+</html>
